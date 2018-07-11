@@ -1,0 +1,52 @@
+<script>
+	
+      var gaProperty = 'UA-XXXXXXXX';
+var disableStr = 'ga-disable-' + gaProperty;
+var acceptedGAStr = 'accepted-ga-' + gaProperty;
+
+if(document.cookie.indexOf(disableStr + '=true') > -1) {
+    $("#cookie-law-info-bar").remove();
+    console.log('rejected-gdpr-ga');
+} else if(document.cookie.indexOf(acceptedGAStr + '=true') > -1) {
+    $("#cookie-law-info-bar").remove();
+    console.log('accepted-gdpr-ga');
+}
+else {
+    $("#cookie-law-info-bar span").html('This site uses <a href="http://analytics.google.com/" target="_blank">Google Analytics</a>. You can read about our Privacy Policy <a href="#">here</a>. <a class="accept-ga" href="javascript:gaOptin()">Accept</a> <a class="reject-ga" href="javascript:gaOptout()">Opt-Out</a>');
+}
+
+if (document.cookie.indexOf(disableStr + '=true') > -1) {
+window[disableStr] = true;
+} else if(document.cookie.indexOf(acceptedGAStr + '=true') > -1) {
+window[disableStr] = false;
+} 
+
+// Opt-in function
+function gaOptin() {
+    document.cookie = disableStr + '=false; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = acceptedGAStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/'
+    window[disableStr] = false;
+    $("#cookie-law-info-bar").remove();
+}
+	
+	function gaOptin2() {
+    document.cookie = disableStr + '=false; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = acceptedGAStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/'
+    window[disableStr] = false;
+    location.reload(true);
+}
+// Opt-out function
+    function gaOptout() {
+    document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+    window[disableStr] = true;
+    location.reload(true);
+}
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-XXXXXXXX', 'auto');
+    ga('send', 'pageview');
+</script>
